@@ -9,8 +9,8 @@ const app = express();
 const corsOptions = {
   origin:
     process.env.NODE_ENV === 'production'
-      ? process.env.VERCEL_URL
-      : process.env.CORS_ORIGIN,
+      ? process.env.CORS_ORIGIN
+      : process.env.DEV_ORIGIN,
 };
 
 app.use(cors(corsOptions));
