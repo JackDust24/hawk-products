@@ -16,8 +16,16 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.get('/api/', (req, res) => {
+app.get(['/api', '/api/'], (req, res) => {
+  console.log('API route hit:', req.path);
+
   res.json({ message: 'Welcome to the API' });
+});
+
+app.get('/', (req, res) => {
+  console.log('Root route hit:', req.path);
+
+  res.json({ message: 'Server is running' });
 });
 
 export default app;
