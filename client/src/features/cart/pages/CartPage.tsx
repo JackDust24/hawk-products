@@ -11,7 +11,7 @@ export const CartPage = () => {
   const [itemToRemove, setItemToRemove] = useState<string | null>(null);
 
   const subtotal = cartItems.reduce((sum, item) => {
-    return sum + item.total;
+    return sum + (item.total || item.product.price * item.quantity);
   }, 0);
 
   const handleRemoveItem = (cartItemId: string) => {
