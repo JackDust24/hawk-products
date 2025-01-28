@@ -1,47 +1,39 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { ProductCard } from './ProductCard';
-import { Pagination } from '../../../components/shared/Pagination';
+import { Pagination } from '@/components/shared/Pagination';
+import { useProductsStore } from '@/stores/productsStore';
+import { useProducts } from '@/hooks/useProducts';
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  category: string;
-}
+const ITEMS_PER_PAGE = 6;
 
 export const ProductSection = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const productsPerPage = 8;
+  const { products, pagination } = useProductsStore();
+  const { fetchProducts, isLoading } = useProducts();
 
-  // Mock for now - this would come from API with proper pagination
-  const products: Product[] = [
-    {
-      id: 1,
-      name: 'MacBook Pro M3',
-      price: 1299.99,
-      image: '/images/test.jpg',
-      category: 'Laptop'
-    },
-    {
-      id: 2,
-      name: 'Sony WH-1000XM4',
-      price: 349.99,
-      image: '/images/test.jpg',
-      category: 'Accessories'
-    }
-    // Add more products...
-  ];
+  useEffect(() => {
+    fetchProducts(1, ITEMS_PER_PAGE);
+  }, []);
 
-  // Calculate pagination values
-  const totalPages = Math.ceil(products.length / productsPerPage);
-  const startIndex = (currentPage - 1) * productsPerPage;
-  const endIndex = startIndex + productsPerPage;
-  const currentProducts = products.slice(startIndex, endIndex);
+  if (isLoading && products.length === 0) {
+    return (
+      <section className="bg-gray-50">
+        <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[1, 2, 3].map((index) => (
+              <div key={index} className="animate-pulse">
+                <div className="h-64 bg-gray-200 rounded-lg"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
 
+  console.log(products);
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    // In real app, this would trigger an API call with the new page number
+    fetchProducts(page, ITEMS_PER_PAGE);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -51,17 +43,21 @@ export const ProductSection = () => {
           <h2 className="text-xl font-bold text-gray-900 sm:text-3xl">Our Products</h2>
         </header>
 
-        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {currentProducts.map((product) => (
+        <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {products.map((product) => (
             <ProductCard key={product.id} {...product} />
           ))}
         </div>
 
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
+        {pagination && (
+          <div className="mt-8">
+            <Pagination
+              currentPage={pagination.currentPage}
+              totalPages={pagination.totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
+        )}
       </div>
     </section>
   );

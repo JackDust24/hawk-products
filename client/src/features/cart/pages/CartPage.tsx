@@ -9,7 +9,7 @@ export const CartPage = () => {
         <div className="lg:col-span-2">
           {/* Cart items will be mapped here */}
           <CartItem
-            id={1}
+            id="1"
             name="Test Product"
             price={99.99}
             quantity={1}

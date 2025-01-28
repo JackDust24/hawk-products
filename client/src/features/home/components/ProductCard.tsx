@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 interface ProductCardProps {
-  id: number;
+  id: string;
   name: string;
   price: number;
   image: string;
@@ -10,7 +10,7 @@ interface ProductCardProps {
 
 export const ProductCard = ({ id, name, price, image, category }: ProductCardProps) => {
   return (
-    <Link to={`/product/${id}`} className="group relative block overflow-hidden">
+    <Link to={`/product/${id}`} className="group relative block overflow-hidden rounded-lg border">
       <button className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
         <span className="sr-only">Wishlist</span>
         <svg
@@ -29,17 +29,20 @@ export const ProductCard = ({ id, name, price, image, category }: ProductCardPro
       </button>
 
       <img
-        src={image}
+        src={`${import.meta.env.VITE_API_URL}${image}`}
         alt={name}
-        className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72"
+        className="h-64 w-full object-cover transition duration-500 group-hover:scale-105"
+        onError={(e) => {
+          e.currentTarget.src = '/images/placeholder.jpg';
+        }}
       />
 
-      <div className="relative border border-gray-100 bg-white p-6">
+      <div className="relative border-t bg-white p-6">
         <span className="whitespace-nowrap bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary">
           {category}
         </span>
 
-        <h3 className="mt-4 text-lg font-medium text-gray-900">{name}</h3>
+        <h3 className="mt-4 text-lg font-medium text-gray-900 line-clamp-1">{name}</h3>
 
         <p className="mt-1.5 text-sm text-gray-700">${price}</p>
 
