@@ -47,7 +47,6 @@ export const CartPage = () => {
           {cartItems.map(({ product, quantity, cartItemId }) => (
             <CartItem
               key={cartItemId}
-              id={product.id}
               name={product.name}
               price={product.price}
               quantity={quantity}

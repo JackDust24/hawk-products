@@ -2,7 +2,6 @@ import { getImageUrl } from '@/utils/image';
 import { QuantityInput } from '@/features/cart/components/QuantityInput';
 
 type CartItemProps = {
-  id: string;
   name: string;
   price: number;
   quantity: number;
@@ -13,7 +12,6 @@ type CartItemProps = {
 };
 
 export const CartItem = ({
-  id,
   name,
   price,
   quantity,
