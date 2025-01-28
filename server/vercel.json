@@ -3,14 +3,21 @@
   "builds": [
     {
       "src": "src/server.js",
-      "use": "@vercel/node",
-      "config": { "includeFiles": ["dist/**"] }
+      "use": "@vercel/node"
+    },
+    {
+      "src": "package.json",
+      "use": "vercel-sapper"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "src/server.ts"
+      "dest": "src/server.js",
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      }
     }
   ]
 }
