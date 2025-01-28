@@ -3,10 +3,15 @@ import { useParams } from 'react-router-dom';
 import { useProducts } from '@/hooks/useProducts';
 import { useProductsStore } from '@/stores/productsStore';
 import { ProductDetails } from '../components/ProductDetails';
+import { useCartStore } from '@/stores/cartStore';
+import { Toast } from '@/components/shared/Toast';
 
 export const ProductPage = () => {
   const { id } = useParams<{ id: string }>();
   const currentProduct = useProductsStore((state) => state.currentProduct);
+  const { addItem } = useCartStore();
+  const [showToast, setShowToast] = useState(false);
+
   const { fetchProductById, isLoading } = useProducts();
   const [quantity, setQuantity] = useState(1);
 
@@ -31,13 +36,11 @@ export const ProductPage = () => {
   const handleAddToCart = () => {
     if (!currentProduct) return;
 
-    // TODO: Implement cart functionality
-    console.log('Adding to cart:', {
-      productId: currentProduct.id,
-      quantity,
-      price: currentProduct.price,
-      total: currentProduct.price * quantity
-    });
+    addItem(currentProduct, quantity, currentProduct.price * quantity);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 4000);
   };
 
   if (isLoading) {
@@ -63,6 +66,13 @@ export const ProductPage = () => {
         onDecrement={handleDecrement}
         onAddToCart={handleAddToCart}
       />
+
+      {showToast && (
+        <Toast
+          message={`${quantity} ${quantity === 1 ? 'item' : 'items'} added to cart`}
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </div>
   );
 };

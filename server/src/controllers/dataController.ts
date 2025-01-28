@@ -37,7 +37,6 @@ export const getProducts = (req: Request, res: Response) => {
 };
 
 export const getCategories = (_req: Request, res: Response) => {
-  console.log('getCategories');
   res.json(categoriesData);
 };
 

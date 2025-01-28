@@ -39,11 +39,9 @@ export type ProductResponse = {
 
 // Cart types
 export type CartItem = {
-  id: string;
-  name: string;
-  price: number;
+  product: Product;
   quantity: number;
-  image: string;
+  total: number;
 };
 
 // Search types

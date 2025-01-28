@@ -1,12 +1,13 @@
 import { Product } from '@/types';
+import { getImageUrl } from '@/utils/image';
 
-interface ProductDetailsProps {
+type ProductDetailsProps = {
   product: Product;
   quantity: number;
   onIncrement: () => void;
   onDecrement: () => void;
   onAddToCart: () => void;
-}
+};
 
 export const ProductDetails = ({
   product: { name, price, description, image },
@@ -19,7 +20,7 @@ export const ProductDetails = ({
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div>
         <img
-          src={`${import.meta.env.VITE_API_URL}${image}`}
+          src={getImageUrl(image)}
           alt={name}
           className="w-full h-96 object-cover rounded-lg"
           onError={(e) => {

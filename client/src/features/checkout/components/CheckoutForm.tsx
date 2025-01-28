@@ -1,17 +1,22 @@
 export const CheckoutForm = () => {
   return (
-    <form className="space-y-6">
-      <div>
-        <label className="label">Email</label>
-        <input type="email" className="input input-bordered w-full" />
+    <div className="max-w-md space-y-6">
+      <div className="space-y-4">
+        <div>
+          <label className="text-sm font-medium">Full Name</label>
+          <input type="text" className="input input-bordered w-full" />
+        </div>
+        <div>
+          <label className="text-sm font-medium">Email</label>
+          <input type="email" className="input input-bordered w-full" />
+        </div>
+        <div>
+          <label className="text-sm font-medium">Address</label>
+          <input type="text" className="input input-bordered w-full" />
+        </div>
       </div>
-      <div>
-        <label className="label">Shipping Address</label>
-        <textarea className="textarea textarea-bordered w-full" />
-      </div>
-      <button type="submit" className="btn btn-primary w-full">
-        Place Order
-      </button>
-    </form>
+
+      <button className="btn btn-primary w-full">Place Order</button>
+    </div>
   );
 };

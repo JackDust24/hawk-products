@@ -5,7 +5,6 @@ import { Category } from '@/types';
 export const SearchBar = () => {
   const [category, setCategory] = useState('all');
   const categories = useCategoriesStore((state) => state.categories);
-  console.log('SearchBar categories', categories);
 
   return (
     <div className="join">

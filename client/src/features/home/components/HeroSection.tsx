@@ -1,4 +1,5 @@
 import { useCategoriesStore } from '@/stores/categoriesStore';
+import { getImageUrl } from '@/utils/image';
 
 export const HeroSection = () => {
   const categories = useCategoriesStore((state) => state.categories);
@@ -29,7 +30,7 @@ export const HeroSection = () => {
               className="relative h-[400px] overflow-hidden rounded-lg shadow transition hover:shadow-lg">
               <img
                 alt={category.name}
-                src={`${import.meta.env.VITE_API_URL}${category.image}`}
+                src={getImageUrl(category.image)}
                 className="absolute inset-0 h-full w-full object-cover"
                 onError={(e) => {
                   e.currentTarget.src = '/images/placeholder.jpg';

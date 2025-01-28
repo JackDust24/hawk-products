@@ -1,14 +1,14 @@
+import { ProductListItem } from '@/types';
 import { Link } from 'react-router-dom';
+import { getImageUrl } from '@/utils/image';
 
-interface ProductCardProps {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  category: string;
-}
+type ProductCardProps = {
+  product: ProductListItem;
+};
 
-export const ProductCard = ({ id, name, price, image, category }: ProductCardProps) => {
+export const ProductCard = ({ product }: ProductCardProps) => {
+  const { id, name, price, image, category } = product;
+
   return (
     <Link to={`/product/${id}`} className="group relative block overflow-hidden rounded-lg border">
       <button className="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75">
@@ -29,7 +29,7 @@ export const ProductCard = ({ id, name, price, image, category }: ProductCardPro
       </button>
 
       <img
-        src={`${import.meta.env.VITE_API_URL}${image}`}
+        src={getImageUrl(image)}
         alt={name}
         className="h-64 w-full object-cover transition duration-500 group-hover:scale-105"
         onError={(e) => {
@@ -46,11 +46,22 @@ export const ProductCard = ({ id, name, price, image, category }: ProductCardPro
 
         <p className="mt-1.5 text-sm text-gray-700">${price}</p>
 
-        <form className="mt-4">
-          <button className="block w-full rounded bg-primary p-4 text-sm font-medium transition hover:scale-105 text-white">
-            Add to Cart
-          </button>
-        </form>
+        <p className="mt-4 text-sm text-blue-600 flex items-center gap-1 group-hover:font-medium transition-all">
+          More Details
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-4 h-4">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+            />
+          </svg>
+        </p>
       </div>
     </Link>
   );
