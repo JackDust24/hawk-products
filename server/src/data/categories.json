@@ -1,0 +1,20 @@
+[
+  {
+    "id": "cat_1a2b3c4d5e",
+    "name": "Kitchen Appliances",
+    "description": "Essential appliances for modern kitchens",
+    "image": "/images/categories/fridge.jpg"
+  },
+  {
+    "id": "cat_2b3c4d5e6f",
+    "name": "Cleaning Appliances",
+    "description": "Devices for maintaining a clean home",
+    "image": "/images/categories/fridge.jpg"
+  },
+  {
+    "id": "cat_3c4d5e6f7g",
+    "name": "Climate Control",
+    "description": "Appliances for temperature and air quality control",
+    "image": "/images/categories/fridge.jpg"
+  }
+]

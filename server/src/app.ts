@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import routes from './routes';
+import path from 'path';
 
 dotenv.config();
 
@@ -16,11 +18,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.get(['/api', '/api/'], (req, res) => {
-  console.log('API route hit:', req.path);
+app.use('/api', routes);
 
-  res.json({ message: 'Welcome to the API' });
-});
+app.use('/images', express.static(path.join(__dirname, '../public/images')));
 
 app.get('/', (req, res) => {
   console.log('Root route hit:', req.path);

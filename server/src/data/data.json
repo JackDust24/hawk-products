@@ -1,80 +1,80 @@
 [
   {
-    "id": 1,
+    "id": "prod_7f4c9a2e3b1d",
     "name": "Smart Refrigerator",
-    "image": "https://unsplash.com/photos/a-refrigerator-filled-with-lots-of-food-and-drinks-ZUhM8LE_HGc",
+    "image": "/images/products/fridge.jpg",
     "description": "A high-tech refrigerator with touch-screen controls and Wi-Fi connectivity.",
     "price": 1500,
     "category": "Kitchen Appliances"
   },
   {
-    "id": 2,
+    "id": "prod_2b8d5f9e4c3a",
     "name": "Microwave Oven",
-    "image": "https://unsplash.com/photos/a-refrigerator-filled-with-lots-of-food-and-drinks-ZUhM8LE_HGc",
+    "image": "/images/products/fridge.jpg",
     "description": "Compact microwave oven with multiple cooking presets and easy-to-use controls.",
     "price": 120,
     "category": "Kitchen Appliances"
   },
   {
-    "id": 3,
+    "id": "prod_3c7e6g8f5d4b",
     "name": "Dishwasher",
-    "image": "https://unsplash.com/photos/a-refrigerator-filled-with-lots-of-food-and-drinks-ZUhM8LE_HGc",
+    "image": "/images/products/fridge.jpg",
     "description": "Energy-efficient dishwasher with a spacious interior and eco-friendly cycles.",
     "price": 700,
     "category": "Kitchen Appliances"
   },
   {
-    "id": 4,
+    "id": "prod_4d6f7h9g6e5c",
     "name": "Vacuum Cleaner",
-    "image": "https://unsplash.com/photos/a-refrigerator-filled-with-lots-of-food-and-drinks-ZUhM8LE_HGc",
+    "image": "/images/products/fridge.jpg",
     "description": "Lightweight vacuum cleaner with powerful suction for carpets and hardwood floors.",
     "price": 200,
     "category": "Cleaning Appliances"
   },
   {
-    "id": 5,
+    "id": "prod_5e8g9i0h7f6d",
     "name": "Air Purifier",
-    "image": "https://unsplash.com/photos/a-refrigerator-filled-with-lots-of-food-and-drinks-ZUhM8LE_HGc",
+    "image": "/images/products/fridge.jpg",
     "description": "High-efficiency air purifier with HEPA filters to remove dust and allergens.",
     "price": 180,
     "category": "Cleaning Appliances"
   },
   {
-    "id": 6,
+    "id": "prod_6f9h0j1i8g7e",
     "name": "Steam Mop",
-    "image": "https://unsplash.com/photos/a-refrigerator-filled-with-lots-of-food-and-drinks-ZUhM8LE_HGc",
+    "image": "/images/products/fridge.jpg",
     "description": "Cordless steam mop for chemical-free cleaning and sanitizing floors.",
     "price": 150,
     "category": "Cleaning Appliances"
   },
   {
-    "id": 7,
+    "id": "prod_7g0i1k2j9h8f",
     "name": "Ceiling Fan",
-    "image": "https://unsplash.com/photos/a-refrigerator-filled-with-lots-of-food-and-drinks-ZUhM8LE_HGc",
+    "image": "/images/products/fridge.jpg",
     "description": "Stylish and energy-efficient ceiling fan with LED light integration.",
     "price": 100,
     "category": "Climate Control"
   },
   {
-    "id": 8,
+    "id": "prod_8h1j2l3k0i9g",
     "name": "Portable Air Conditioner",
-    "image": "https://unsplash.com/photos/a-refrigerator-filled-with-lots-of-food-and-drinks-ZUhM8LE_HGc",
+    "image": "/images/products/fridge.jpg",
     "description": "Compact portable air conditioner with smart temperature control.",
     "price": 400,
     "category": "Climate Control"
   },
   {
-    "id": 9,
+    "id": "prod_9i2k3m4n1o0h",
     "name": "Heater",
-    "image": "https://unsplash.com/photos/a-refrigerator-filled-with-lots-of-food-and-drinks-ZUhM8LE_HGc",
+    "image": "/images/products/fridge.jpg",
     "description": "Safe and efficient heater with multiple temperature settings and an auto shut-off.",
     "price": 120,
     "category": "Climate Control"
   },
   {
-    "id": 10,
+    "id": "prod_0j3l4o5p2q1i",
     "name": "Dehumidifier",
-    "image": "https://unsplash.com/photos/a-refrigerator-filled-with-lots-of-food-and-drinks-ZUhM8LE_HGc",
+    "image": "/images/products/fridge.jpg",
     "description": "Portable dehumidifier with a large water tank and continuous drain option.",
     "price": 250,
     "category": "Climate Control"
