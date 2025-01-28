@@ -1,61 +1,51 @@
+import { useCategoriesStore } from '@/stores/categoriesStore';
+
 export const HeroSection = () => {
+  const categories = useCategoriesStore((state) => state.categories);
+
+  if (categories.length === 0) {
+    return (
+      <section className="bg-gray-50">
+        <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {[1, 2, 3].map((index) => (
+              <div key={index} className="animate-pulse">
+                <div className="h-64 bg-gray-200 rounded-lg"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="bg-gray-50">
       <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          <article className="relative overflow-hidden rounded-lg shadow transition hover:shadow-lg">
-            <img
-              alt="Laptop"
-              src="/images/test.jpg"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
+          {categories.map((category) => (
+            <article
+              key={category.id}
+              className="relative h-[400px] overflow-hidden rounded-lg shadow transition hover:shadow-lg">
+              <img
+                alt={category.name}
+                src={`${import.meta.env.VITE_API_URL}${category.image}`}
+                className="absolute inset-0 h-full w-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.src = '/images/placeholder.jpg';
+                }}
+              />
 
-            <div className="relative bg-gradient-to-t from-gray-900/50 to-gray-900/25 pt-32 sm:pt-48 lg:pt-64">
-              <div className="p-4 sm:p-6">
-                <h3 className="mt-0.5 text-lg text-white">Laptop Collection</h3>
-
-                <p className="mt-2 line-clamp-3 text-sm/relaxed text-white/95">
-                  Discover our premium selection of laptops for work and play
-                </p>
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/75 to-gray-900/25">
+                <div className="absolute bottom-0 p-4 sm:p-6">
+                  <h3 className="text-xl font-bold text-white">{category.name}</h3>
+                  <p className="mt-2 line-clamp-2 text-sm/relaxed text-white/95">
+                    {category.description}
+                  </p>
+                </div>
               </div>
-            </div>
-          </article>
-
-          <article className="relative overflow-hidden rounded-lg shadow transition hover:shadow-lg">
-            <img
-              alt="Accessories"
-              src="/images/test.jpg"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-
-            <div className="relative bg-gradient-to-t from-gray-900/50 to-gray-900/25 pt-32 sm:pt-48 lg:pt-64">
-              <div className="p-4 sm:p-6">
-                <h3 className="mt-0.5 text-lg text-white">Accessories Collection</h3>
-
-                <p className="mt-2 line-clamp-3 text-sm/relaxed text-white/95">
-                  Enhance your tech experience with our curated accessories
-                </p>
-              </div>
-            </div>
-          </article>
-
-          <article className="relative overflow-hidden rounded-lg shadow transition hover:shadow-lg">
-            <img
-              alt="Cameras"
-              src="/images/test.jpg"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-
-            <div className="relative bg-gradient-to-t from-gray-900/50 to-gray-900/25 pt-32 sm:pt-48 lg:pt-64">
-              <div className="p-4 sm:p-6">
-                <h3 className="mt-0.5 text-lg text-white">Camera Collection</h3>
-
-                <p className="mt-2 line-clamp-3 text-sm/relaxed text-white/95">
-                  Capture life's moments with our professional cameras
-                </p>
-              </div>
-            </div>
-          </article>
+            </article>
+          ))}
         </div>
       </div>
     </section>

@@ -1,3 +1,7 @@
+import { useEffect } from 'react';
+import { api } from '@/lib/axios';
+import { useCategoriesStore } from '@/stores/categoriesStore';
+import { Category } from '@/types';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/layout/Navbar';
 import { HomePage } from './features/home/pages/HomePage';
@@ -5,7 +9,22 @@ import { ProductPage } from './features/product/pages/ProductPage';
 import { CartPage } from './features/cart/pages/CartPage';
 import { CheckoutPage } from './features/checkout/pages/CheckoutPage';
 
-function App() {
+export const App = () => {
+  const setCategories = useCategoriesStore((state) => state.setCategories);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await api.get<Category[]>('/products/categories');
+        setCategories(data);
+      } catch (error) {
+        console.error('Failed to fetch categories:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
@@ -19,6 +38,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;
