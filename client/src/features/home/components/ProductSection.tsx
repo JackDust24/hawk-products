@@ -1,25 +1,19 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { ProductCard } from './ProductCard';
 import { Pagination } from '@/components/shared/Pagination';
 import { useProductsStore } from '@/stores/productsStore';
 import { useProducts } from '@/hooks/useProducts';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 
 const ITEMS_PER_PAGE = 6;
 
 export const ProductSection = () => {
   const { products, pagination } = useProductsStore();
   const { fetchProducts, isLoading } = useProducts();
-  const { pathname } = useLocation();
-  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetchProducts(1, ITEMS_PER_PAGE);
   }, []);
-
-  useEffect(() => {
-    sectionRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [pathname]);
 
   if (isLoading && products.length === 0) {
     return (
@@ -39,11 +33,10 @@ export const ProductSection = () => {
 
   const handlePageChange = (page: number) => {
     fetchProducts(page, ITEMS_PER_PAGE);
-    sectionRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <div ref={sectionRef} className="space-y-8 py-8">
+    <div className="space-y-8 py-8">
       <div className="text-center">
         <h2 className="text-2xl font-bold">Featured Products</h2>
       </div>

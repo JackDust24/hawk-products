@@ -1,5 +1,6 @@
 import { useCategoriesStore } from '@/stores/categoriesStore';
 import { getImageUrl } from '@/utils/image';
+import { ImageWithLoading } from '../helpers';
 
 export const HeroSection = () => {
   const categories = useCategoriesStore((state) => state.categories);
@@ -28,13 +29,10 @@ export const HeroSection = () => {
             <article
               key={category.id}
               className="relative h-[400px] overflow-hidden rounded-lg shadow transition hover:shadow-lg">
-              <img
-                alt={category.name}
+              <ImageWithLoading
                 src={getImageUrl(category.image)}
-                className="absolute inset-0 h-full w-full object-cover"
-                onError={(e) => {
-                  e.currentTarget.src = '/images/placeholder.jpg';
-                }}
+                alt={category.name}
+                className="group-hover:scale-105"
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-gray-900/75 to-gray-900/25">

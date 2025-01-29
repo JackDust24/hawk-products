@@ -10,7 +10,7 @@
   {
     "id": "prod_2b8d5f9e4c3a",
     "name": "Microwave Oven",
-    "image": "/images/products/fridge.jpg",
+    "image": "/images/products/microwave.jpg",
     "description": "Compact microwave oven with multiple cooking presets and easy-to-use controls.",
     "price": 120,
     "category": "Kitchen Appliances"
@@ -18,7 +18,7 @@
   {
     "id": "prod_3c7e6g8f5d4b",
     "name": "Dishwasher",
-    "image": "/images/products/fridge.jpg",
+    "image": "/images/products/dishwasher.jpg",
     "description": "Energy-efficient dishwasher with a spacious interior and eco-friendly cycles.",
     "price": 700,
     "category": "Kitchen Appliances"
@@ -26,7 +26,7 @@
   {
     "id": "prod_4d6f7h9g6e5c",
     "name": "Vacuum Cleaner",
-    "image": "/images/products/fridge.jpg",
+    "image": "/images/products/vacuum.jpg",
     "description": "Lightweight vacuum cleaner with powerful suction for carpets and hardwood floors.",
     "price": 200,
     "category": "Cleaning Appliances"
@@ -34,7 +34,7 @@
   {
     "id": "prod_5e8g9i0h7f6d",
     "name": "Air Purifier",
-    "image": "/images/products/fridge.jpg",
+    "image": "/images/products/purifier.jpg",
     "description": "High-efficiency air purifier with HEPA filters to remove dust and allergens.",
     "price": 180,
     "category": "Cleaning Appliances"
@@ -42,7 +42,7 @@
   {
     "id": "prod_6f9h0j1i8g7e",
     "name": "Steam Mop",
-    "image": "/images/products/fridge.jpg",
+    "image": "/images/products/mop.jpg",
     "description": "Cordless steam mop for chemical-free cleaning and sanitizing floors.",
     "price": 150,
     "category": "Cleaning Appliances"
@@ -50,7 +50,7 @@
   {
     "id": "prod_7g0i1k2j9h8f",
     "name": "Ceiling Fan",
-    "image": "/images/products/fridge.jpg",
+    "image": "/images/products/fan.jpg",
     "description": "Stylish and energy-efficient ceiling fan with LED light integration.",
     "price": 100,
     "category": "Climate Control"
@@ -58,7 +58,7 @@
   {
     "id": "prod_8h1j2l3k0i9g",
     "name": "Portable Air Conditioner",
-    "image": "/images/products/fridge.jpg",
+    "image": "/images/products/conditioner.jpg",
     "description": "Compact portable air conditioner with smart temperature control.",
     "price": 400,
     "category": "Climate Control"
@@ -66,16 +66,16 @@
   {
     "id": "prod_9i2k3m4n1o0h",
     "name": "Heater",
-    "image": "/images/products/fridge.jpg",
+    "image": "/images/products/heater.jpg",
     "description": "Safe and efficient heater with multiple temperature settings and an auto shut-off.",
     "price": 120,
     "category": "Climate Control"
   },
   {
     "id": "prod_0j3l4o5p2q1i",
-    "name": "Dehumidifier",
-    "image": "/images/products/fridge.jpg",
-    "description": "Portable dehumidifier with a large water tank and continuous drain option.",
+    "name": "Thermostat",
+    "image": "/images/products/thermostat.jpg",
+    "description": "Thermostat with a digital display and programmable settings.",
     "price": 250,
     "category": "Climate Control"
   }
