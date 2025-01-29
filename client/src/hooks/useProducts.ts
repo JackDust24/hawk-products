@@ -16,7 +16,8 @@ export const useProducts = () => {
       );
       setProducts(data.products, data.pagination);
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'Failed to fetch products');
+      console.error('Failed to fetch products:', error);
+      setError('Failed to connect to the server. Please try again later.');
     } finally {
       setIsLoading(false);
     }
@@ -28,6 +29,7 @@ export const useProducts = () => {
       const { data } = await api.get<Product>(`/products/product/${id}`);
       setCurrentProduct(data);
     } catch (error) {
+      console.error('Failed to fetch products:', error);
       setError(error instanceof Error ? error.message : 'Failed to fetch product');
     } finally {
       setIsLoading(false);
