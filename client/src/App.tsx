@@ -8,6 +8,7 @@ import { HomePage } from './features/home/pages/HomePage';
 import { ProductPage } from './features/product/pages/ProductPage';
 import { CartPage } from './features/cart/pages/CartPage';
 import { CheckoutPage } from './features/checkout/pages/CheckoutPage';
+import { OrderConfirmation } from './features/checkout/pages/OrderConfirmation';
 
 export const App = () => {
   const setCategories = useCategoriesStore((state) => state.setCategories);
@@ -34,6 +35,7 @@ export const App = () => {
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/order-confirmation/:orderNumber" element={<OrderConfirmation />} />
         </Routes>
       </div>
     </Router>

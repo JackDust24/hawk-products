@@ -3,11 +3,13 @@ export type ProductCategory =
   | 'Cleaning Appliances'
   | 'Climate Control';
 
-export interface Product {
-  id: number;
+export type Product = {
+  id: string;
   name: string;
   image: string;
   description: string;
   price: number;
-  category: ProductCategory;
-}
+  category: string;
+};
+
+export type ProductListItem = Omit<Product, 'description'>;

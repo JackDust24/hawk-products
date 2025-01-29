@@ -70,6 +70,7 @@ export const ProductPage = () => {
       {showToast && (
         <Toast
           message={`${quantity} ${quantity === 1 ? 'item' : 'items'} added to cart`}
+          type="success"
           onClose={() => setShowToast(false)}
         />
       )}

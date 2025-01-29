@@ -1,4 +1,5 @@
 import { CheckoutForm } from '../components/CheckoutForm';
+import { OrderSummary } from '../components/OrderSummary';
 
 export const CheckoutPage = () => {
   return (
@@ -8,10 +9,7 @@ export const CheckoutPage = () => {
         <div className="lg:col-span-2">
           <CheckoutForm />
         </div>
-        <div className="bg-white p-6 rounded-lg shadow h-fit">
-          <h2 className="text-lg font-semibold mb-4">Order Summary</h2>
-          {/* Order summary content */}
-        </div>
+        <OrderSummary />
       </div>
     </div>
   );

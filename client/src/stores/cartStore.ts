@@ -16,6 +16,7 @@ type CartStore = {
   removeItem: (cartItemId: string) => void;
   updateQuantity: (cartItemId: string, quantity: number) => void;
   getTotalItems: () => number;
+  clearCart: () => void;
 };
 
 // Load initial state from localStorage
@@ -72,5 +73,10 @@ export const useCartStore = create<CartStore>((set, get) => ({
   getTotalItems: () => {
     const { items } = get();
     return Object.keys(items).length;
+  },
+
+  clearCart: () => {
+    localStorage.removeItem(CART_STORAGE_KEY);
+    set({ items: {} });
   }
 }));

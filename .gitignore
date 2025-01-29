@@ -43,3 +43,7 @@ server/.env
 
 # Optional eslint cache
 .eslintcache 
+
+
+# Output
+**/output
