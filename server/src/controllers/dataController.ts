@@ -24,6 +24,9 @@ export const getProducts = (req: Request, res: Response) => {
   const category = req.query.category as string;
   const searchTerm = req.query.searchTerm as string;
 
+  const sortBy = (req.query.sortBy as string) || undefined;
+  const sortOrder = (req.query.sortOrder as string) || undefined;
+
   // Filter by category if not 'all'
   let filteredProducts = productsData;
 
@@ -41,19 +44,36 @@ export const getProducts = (req: Request, res: Response) => {
     );
   }
 
-  // Remove description from the response
-  const productsToSend: ProductListItem[] = filteredProducts.map(
-    ({ description, ...rest }) => rest
-  );
+  if (sortBy === 'price') {
+    filteredProducts = filteredProducts.sort((a, b) => {
+      return sortOrder === 'ASC' ? a.price - b.price : b.price - a.price;
+    });
+  }
+
+  if (sortBy === 'name') {
+    filteredProducts = filteredProducts.sort((a, b) => {
+      const nameA = a.name.toLowerCase();
+      const nameB = b.name.toLowerCase();
+
+      return sortOrder === 'ASC'
+        ? nameA.localeCompare(nameB)
+        : nameB.localeCompare(nameA);
+    });
+  }
 
   // Just a warning to the console if the category is not valid
-  productsToSend.forEach((product) => {
+  filteredProducts.forEach((product) => {
     if (!isValidCategory(product.category)) {
       console.warn(
         `Warning: Product "${product.name}" has unidentified category "${product.category}"`
       );
     }
   });
+
+  // Remove description from the response
+  const productsToSend: ProductListItem[] = filteredProducts.map(
+    ({ description, ...rest }) => rest
+  );
 
   const paginatedProducts = productsToSend.slice(startIndex, endIndex);
   const totalPages = Math.ceil(productsToSend.length / limit);

@@ -5,14 +5,17 @@ import { useProductsStore } from '@/stores/productsStore';
 import { useProducts } from '@/hooks/useProducts';
 import { ErrorFallback } from '@/components/ErrorFallback';
 import { DEFAULT_PAGE, ITEMS_PER_PAGE } from '@/constants';
+import { SortProducts } from './Sort';
+import { useFitleredStore } from '@/stores/filteredStore';
 
 export const ProductSection = () => {
   const { products, pagination } = useProductsStore();
   const { fetchProducts, isLoading, error } = useProducts();
+  const { filteredCategory, searchedTerm, sortBy, sortOrder } = useFitleredStore();
 
   useEffect(() => {
-    fetchProducts(DEFAULT_PAGE, ITEMS_PER_PAGE);
-  }, []);
+    fetchProducts(DEFAULT_PAGE, ITEMS_PER_PAGE, filteredCategory, searchedTerm, sortBy, sortOrder);
+  }, [sortBy, sortOrder, filteredCategory, searchedTerm]);
 
   if (error) {
     return <ErrorFallback message={error} onRetry={() => window.location.reload()} />;
@@ -68,7 +71,7 @@ export const ProductSection = () => {
   }
 
   const handlePageChange = (page: number) => {
-    fetchProducts(page, ITEMS_PER_PAGE);
+    fetchProducts(page, ITEMS_PER_PAGE, filteredCategory, searchedTerm, sortBy, sortOrder);
   };
 
   return (
@@ -81,6 +84,11 @@ export const ProductSection = () => {
 
       <section className="bg-gray-50">
         <div className="mx-auto max-w-screen-xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+          {/* Sorting Component */}
+          <div className="flex pb-2">
+            <SortProducts />
+          </div>
+
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />

@@ -1,4 +1,4 @@
-import { SearchBar } from '../shared/SearchBar';
+import { SearchBar } from './SearchBar';
 import { CartIcon } from '../shared/CartIcon';
 import { LoginButton } from '../shared/LoginButton';
 import { Link } from 'react-router-dom';

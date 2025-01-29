@@ -13,11 +13,21 @@ export const useProducts = () => {
     page: number = DEFAULT_PAGE,
     limit: number = ITEMS_PER_PAGE,
     category: string = DEFAULT_CATEGORY,
-    searchTerm: string = DEFAULT_SEARCH_TERM
+    searchTerm: string = DEFAULT_SEARCH_TERM,
+    sortBy: string = '',
+    sortOrder: string = ''
   ) => {
     try {
       setIsLoading(true);
       let url = `/products/productslist?page=${page}&limit=${limit}&category=${category}&searchTerm=${searchTerm}`;
+
+      // Conditionally add sortBy and sortOrder to the URL if they are different from the default values
+      if (sortBy !== '') {
+        url += `&sortBy=${sortBy}`;
+      }
+      if (sortOrder !== '') {
+        url += `&sortOrder=${sortOrder}`;
+      }
 
       const { data } = await api.get<ProductsResponse>(url);
       setProducts(data.products, data.pagination);
