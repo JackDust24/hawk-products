@@ -17,15 +17,36 @@ const isValidCategory = (category: string): category is ProductCategory => {
 export const getProducts = (req: Request, res: Response) => {
   const page = parseInt(req.query.page as string) || 1;
   // Default to 4 if not specified
-  const limit = parseInt(req.query.limit as string) || 4;
+  const limit = parseInt(req.query.limit as string) || 6;
   const startIndex = (page - 1) * limit;
   const endIndex = startIndex + limit;
 
+  const category = req.query.category as string;
+  const searchTerm = req.query.searchTerm as string;
+
+  // Filter by category if not 'all'
+  let filteredProducts = productsData;
+
+  if (category && category !== 'all') {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.category.toLowerCase() === category.toLowerCase()
+    );
+  }
+
+  // Filter by search term
+  if (searchTerm) {
+    const lowerCaseSearch = searchTerm.toLowerCase();
+    filteredProducts = filteredProducts.filter((product) =>
+      product.name.toLowerCase().includes(lowerCaseSearch)
+    );
+  }
+
   // Remove description from the response
-  const productsToSend: ProductListItem[] = productsData.map(
+  const productsToSend: ProductListItem[] = filteredProducts.map(
     ({ description, ...rest }) => rest
   );
 
+  // Just a warning to the console if the category is not valid
   productsToSend.forEach((product) => {
     if (!isValidCategory(product.category)) {
       console.warn(

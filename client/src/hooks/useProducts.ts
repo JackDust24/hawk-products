@@ -2,18 +2,24 @@ import { useState } from 'react';
 import { api } from '@/lib/axios';
 import { useProductsStore } from '@/stores/productsStore';
 import { ProductsResponse, Product } from '@/types';
+import { DEFAULT_PAGE, ITEMS_PER_PAGE, DEFAULT_CATEGORY, DEFAULT_SEARCH_TERM } from '@/constants';
 
 export const useProducts = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { setProducts, setCurrentProduct } = useProductsStore();
 
-  const fetchProducts = async (page: number = 1, limit: number = 6) => {
+  const fetchProducts = async (
+    page: number = DEFAULT_PAGE,
+    limit: number = ITEMS_PER_PAGE,
+    category: string = DEFAULT_CATEGORY,
+    searchTerm: string = DEFAULT_SEARCH_TERM
+  ) => {
     try {
       setIsLoading(true);
-      const { data } = await api.get<ProductsResponse>(
-        `/products/productslist?page=${page}&limit=${limit}`
-      );
+      let url = `/products/productslist?page=${page}&limit=${limit}&category=${category}&searchTerm=${searchTerm}`;
+
+      const { data } = await api.get<ProductsResponse>(url);
       setProducts(data.products, data.pagination);
     } catch (error) {
       console.error('Failed to fetch products:', error);

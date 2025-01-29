@@ -4,22 +4,21 @@ import { Pagination } from '@/components/shared/Pagination';
 import { useProductsStore } from '@/stores/productsStore';
 import { useProducts } from '@/hooks/useProducts';
 import { ErrorFallback } from '@/components/ErrorFallback';
-
-const ITEMS_PER_PAGE = 6;
+import { DEFAULT_PAGE, ITEMS_PER_PAGE } from '@/constants';
 
 export const ProductSection = () => {
   const { products, pagination } = useProductsStore();
   const { fetchProducts, isLoading, error } = useProducts();
 
   useEffect(() => {
-    fetchProducts(1, ITEMS_PER_PAGE);
+    fetchProducts(DEFAULT_PAGE, ITEMS_PER_PAGE);
   }, []);
 
   if (error) {
     return <ErrorFallback message={error} onRetry={() => window.location.reload()} />;
   }
 
-  if (isLoading || products.length === 0) {
+  if (isLoading) {
     return (
       <section className="bg-gray-50">
         <div className="mx-auto max-w-screen-xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
@@ -30,7 +29,7 @@ export const ProductSection = () => {
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[...Array(6)].map((_, index) => (
+            {[...Array(ITEMS_PER_PAGE)].map((_, index) => (
               <div
                 key={index}
                 className="animate-pulse space-y-3 p-4 bg-white shadow-sm rounded-lg">
@@ -48,6 +47,21 @@ export const ProductSection = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (products.length === 0) {
+    return (
+      <section className="bg-gray-50">
+        <div className="mx-auto max-w-screen-xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
+          <div className="text-center mb-6">
+            <header>
+              <h2 className="text-2xl font-bold">Featured Products</h2>
+            </header>
+          </div>
+          <div className="text-center text-xl text-red-500">No Products Found</div>
         </div>
       </section>
     );
