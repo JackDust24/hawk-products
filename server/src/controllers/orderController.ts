@@ -1,12 +1,15 @@
 import { Request, Response } from 'express';
 import { z } from 'zod';
-import fs from 'fs/promises';
-import path from 'path';
 import { sanitizeFormInput, generateOrderNumber } from '../utils/order';
 import { Order, CreateOrderInformation } from '../types/order';
+import { createClient } from '@supabase/supabase-js';
+import dotenv from 'dotenv';
 
-const ORDERS_DIR = path.join(__dirname, '../../output');
-const ORDERS_FILE = path.join(ORDERS_DIR, 'orders.json');
+dotenv.config();
+
+const supabaseUrl = process.env.SUPABASE_URL || '';
+const supabaseKey = process.env.SUPABASE_KEY || '';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 const orderItemSchema = z.object({
   productId: z.string(),
@@ -31,40 +34,45 @@ export const createOrder = async (req: Request, res: Response) => {
     const validatedData = createOrderSchema.parse(req.body);
     const orderData: CreateOrderInformation = validatedData;
 
-    // If directory already exists then recursive true will do nothing
-    await fs.mkdir(ORDERS_DIR, { recursive: true });
-
-    let orders: Order[] = [];
-    try {
-      const ordersFile = await fs.readFile(ORDERS_FILE, 'utf-8');
-      orders = JSON.parse(ordersFile);
-    } catch (error) {
-      // Initialize the file with an empty array if it doesn't exist
-      await fs.writeFile(ORDERS_FILE, JSON.stringify([], null, 2));
-    }
-
     // Create new order
     const newOrder: Order = {
-      orderId: crypto.randomUUID(),
-      orderNumber: generateOrderNumber(),
-      customerDetails: {
-        name: sanitizeFormInput(orderData.customerDetails.name),
-        email: orderData.customerDetails.email.toLowerCase(),
-        address: sanitizeFormInput(orderData.customerDetails.address),
-      },
+      order_number: generateOrderNumber(),
+      customer_name: sanitizeFormInput(orderData.customerDetails.name),
+      customer_email: orderData.customerDetails.email.toLowerCase(),
+      customer_address: sanitizeFormInput(orderData.customerDetails.address),
       items: orderData.items,
-      totalAmount: orderData.totalAmount,
+      total_amount: orderData.totalAmount,
       status: 'pending',
-      createdAt: new Date().toISOString(),
+      created_at: new Date().toISOString(),
     };
 
-    orders.push(newOrder);
-    await fs.writeFile(ORDERS_FILE, JSON.stringify(orders, null, 2));
+    const { data, error } = await supabase
+      .from('orders')
+      .insert([newOrder])
+      .select('*'); // Ensure we get the inserted data
+
+    if (error) {
+      console.error('Supabase insert error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to create order in Supabase',
+        error: error.message,
+      });
+    }
+
+    // Ensure `data` is an array with at least one entry
+    if (!Array.isArray(data) || data.length === 0) {
+      console.error('Unexpected response from Supabase:', data);
+      return res.status(500).json({
+        success: false,
+        message: 'Order creation failed, unexpected response from Supabase',
+      });
+    }
 
     res.status(201).json({
       success: true,
-      orderNumber: newOrder.orderNumber,
-      orderId: newOrder.orderId,
+      orderNumber: newOrder.order_number,
+      orderId: data[0].order_id,
     });
   } catch (error) {
     if (error instanceof z.ZodError) {

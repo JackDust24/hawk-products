@@ -7,17 +7,14 @@ export type OrderItem = {
 };
 
 export type Order = {
-  orderId: string;
-  orderNumber: string;
-  customerDetails: {
-    name: string;
-    email: string;
-    address: string;
-  };
+  order_number: string;
+  customer_name: string;
+  customer_email: string;
+  customer_address: string;
   items: OrderItem[];
-  totalAmount: number;
+  total_amount: number;
   status: 'pending' | 'completed' | 'cancelled';
-  createdAt: string;
+  created_at: string;
 };
 
 export type CreateOrderInformation = {
