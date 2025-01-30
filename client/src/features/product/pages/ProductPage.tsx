@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useProducts } from '@/hooks/useProducts';
 import { useProductsStore } from '@/stores/productsStore';
@@ -14,18 +14,10 @@ export const ProductPage = () => {
 
   const { fetchProductById, isLoading } = useProducts();
   const [quantity, setQuantity] = useState(1);
-  const [isProductFetched, setIsProductFetched] = useState(false);
-  const isMounted = useRef(false);
 
   useEffect(() => {
-    if (!isMounted.current) {
-      isMounted.current = true;
-      return;
-    }
-
-    if (id && !isProductFetched) {
+    if (id) {
       fetchProductById(id);
-      setIsProductFetched(true);
     }
     // Cleanup on unmount
     return () => {

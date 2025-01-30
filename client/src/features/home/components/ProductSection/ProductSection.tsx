@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useProductsStore } from '@/stores/productsStore';
 import { useProducts } from '@/hooks/useProducts';
 import { ErrorFallback } from '@/components/ErrorFallback';
@@ -18,15 +18,9 @@ export const ProductSection = () => {
 
   const [sortBy, setSortBy] = useState('');
   const [sortOrder, setSortOrder] = useState('');
-  const isMounted = useRef(false);
   const [fetchComplete, setFetchComplete] = useState(false);
 
   useEffect(() => {
-    if (!isMounted.current) {
-      isMounted.current = true;
-      return;
-    }
-
     fetchProducts(
       DEFAULT_PAGE,
       ITEMS_PER_PAGE,
