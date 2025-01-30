@@ -10,6 +10,5 @@ export const sanitizeInput = (input: string): string => {
     ALLOWED_ATTR: []
   });
 
-  // Trim whitespace and normalize spaces
   return sanitized.trim().replace(/\s+/g, ' ');
 };

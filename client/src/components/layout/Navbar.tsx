@@ -50,7 +50,6 @@ export const Navbar = () => {
       </div>
 
       <div className="hidden md:flex md:flex-1 justify-end gap-4">
-        <LoginButton />
         <CartIcon />
       </div>
     </div>

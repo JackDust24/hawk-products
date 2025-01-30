@@ -44,9 +44,12 @@ export const getProducts = (req: Request, res: Response) => {
     );
   }
 
+  // To handle default sort order if blank
+  const defaulOrder = sortOrder !== undefined ? sortOrder : 'ASC';
+
   if (sortBy === 'price') {
     filteredProducts = filteredProducts.sort((a, b) => {
-      return sortOrder === 'ASC' ? a.price - b.price : b.price - a.price;
+      return defaulOrder === 'ASC' ? a.price - b.price : b.price - a.price;
     });
   }
 
@@ -55,7 +58,7 @@ export const getProducts = (req: Request, res: Response) => {
       const nameA = a.name.toLowerCase();
       const nameB = b.name.toLowerCase();
 
-      return sortOrder === 'ASC'
+      return defaulOrder === 'ASC'
         ? nameA.localeCompare(nameB)
         : nameB.localeCompare(nameA);
     });

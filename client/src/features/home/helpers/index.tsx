@@ -1,3 +1,8 @@
+/*
+
+  This is a helper function that is used to display an image with a loading state.
+*/
+
 import { useState } from 'react';
 
 export const ImageWithLoading = ({
