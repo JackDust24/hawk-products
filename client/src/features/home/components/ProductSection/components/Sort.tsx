@@ -1,16 +1,19 @@
-import { useFitleredStore } from '@/stores/filteredStore';
+type SortProductsProps = {
+  sortBy: string;
+  sortOrder: string;
+  onSortBy: (sortBy: string) => void;
+  onSortOrder: (sortOrder: string) => void;
+};
 
-export const SortProducts = () => {
-  const { sortBy, sortOrder, setSortBy, setSortOrder } = useFitleredStore();
-
+export const SortProducts = ({ sortBy, sortOrder, onSortBy, onSortOrder }: SortProductsProps) => {
   const handleSortByChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSortBy = e.target.value;
-    setSortBy(selectedSortBy);
+    onSortBy(selectedSortBy);
   };
 
   const handleSortOrderChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSortOrder = e.target.value;
-    setSortOrder(selectedSortOrder);
+    onSortOrder(selectedSortOrder);
   };
 
   return (

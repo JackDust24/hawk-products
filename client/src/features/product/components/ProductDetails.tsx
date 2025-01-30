@@ -1,3 +1,4 @@
+import { useDebounce } from '@/hooks/useDebounce';
 import { Product } from '@/types';
 import { getImageUrl } from '@/utils/image';
 
@@ -16,6 +17,8 @@ export const ProductDetails = ({
   onDecrement,
   onAddToCart
 }: ProductDetailsProps) => {
+  const onDebounceAdd = useDebounce(onAddToCart, 400);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div>
@@ -53,7 +56,7 @@ export const ProductDetails = ({
         </div>
 
         <div className="pt-6">
-          <button onClick={onAddToCart} className="btn btn-primary w-full">
+          <button onClick={onDebounceAdd} className="btn btn-primary w-full">
             Add to Cart - ${(price * quantity).toFixed(2)}
           </button>
         </div>

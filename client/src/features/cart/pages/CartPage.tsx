@@ -1,9 +1,9 @@
-import { CartItem } from '../components/CartItem';
 import { Link } from 'react-router-dom';
 import { useCartStore } from '@/stores/cartStore';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { OrderSummary } from '../components/OrderSummary';
 import { Modal } from '@/components/shared/Modal';
+import { CartItems } from '../components/CartItems';
 
 export const CartPage = () => {
   const { items, removeItem, updateQuantity } = useCartStore();
@@ -14,16 +14,16 @@ export const CartPage = () => {
     return sum + (item.total || item.product.price * item.quantity);
   }, 0);
 
-  const handleRemoveItem = (cartItemId: string) => {
+  const handleRemoveItem = useCallback((cartItemId: string) => {
     setItemToRemove(cartItemId);
-  };
+  }, []);
 
-  const handleConfirmRemove = () => {
+  const handleConfirmRemove = useCallback(() => {
     if (itemToRemove) {
       removeItem(itemToRemove);
       setItemToRemove(null);
     }
-  };
+  }, [itemToRemove, removeItem]);
 
   if (cartItems.length === 0) {
     return (
@@ -44,18 +44,11 @@ export const CartPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         <div className="space-y-4">
-          {cartItems.map(({ product, quantity, cartItemId }) => (
-            <CartItem
-              key={cartItemId}
-              name={product.name}
-              price={product.price}
-              quantity={quantity}
-              image={product.image}
-              onDelete={() => handleRemoveItem(cartItemId)}
-              onQuantityChange={(newQuantity) => updateQuantity(cartItemId, newQuantity)}
-              className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm"
-            />
-          ))}
+          <CartItems
+            items={cartItems}
+            onDelete={handleRemoveItem}
+            onQuantityChange={updateQuantity}
+          />
         </div>
 
         <div className="md:max-w-md">

@@ -1,7 +1,7 @@
 import { ProductListItem } from '@/types';
 import { Link } from 'react-router-dom';
 import { getImageUrl } from '@/utils/image';
-import { ImageWithLoading } from '../helpers';
+import { ImageWithLoading } from '../../../helpers';
 import { ChevronRight } from 'lucide-react';
 
 type ProductCardProps = {
