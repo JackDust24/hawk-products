@@ -11,12 +11,13 @@ type ProductDetailsProps = {
 };
 
 export const ProductDetails = ({
-  product: { name, price, description, image },
+  product,
   quantity,
   onIncrement,
   onDecrement,
   onAddToCart
 }: ProductDetailsProps) => {
+  const { name, price, description, image } = product;
   const onDebounceAdd = useDebounce(onAddToCart, 400);
 
   return (

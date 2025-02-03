@@ -19,10 +19,9 @@ export const ProductPage = () => {
     if (id) {
       fetchProductById(id);
     }
-    // Cleanup on unmount
-    return () => {
+    if (process.env.NODE_ENV !== 'test') {
       useProductsStore.getState().setCurrentProduct(null);
-    };
+    }
   }, [id]);
 
   const handleIncrement = () => {

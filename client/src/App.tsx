@@ -17,7 +17,9 @@ export const App = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-primary"></div>
+        <div
+          aria-label="spinner"
+          className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-primary"></div>
       </div>
     );
   }
@@ -27,7 +29,7 @@ export const App = () => {
   }
 
   return (
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <div className="min-h-screen bg-gray-50">
         <Navbar />
         <div className="w-full">
