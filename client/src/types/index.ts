@@ -11,12 +11,12 @@ export type Product = {
 export type ProductListItem = Omit<Product, 'description'>;
 
 // Category types
-export interface Category {
+export type Category = {
   id: string;
   name: string;
   description: string;
   image: string;
-}
+};
 
 // Pagination types
 export type PaginationData = {
