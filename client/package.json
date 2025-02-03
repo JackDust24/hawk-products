@@ -9,9 +9,11 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx}\""
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx}\"",
+    "test": "vitest"
   },
   "dependencies": {
+    "@vitejs/plugin-react-swc": "^3.7.2",
     "axios": "^1.7.9",
     "dompurify": "^3.2.3",
     "lucide-react": "^0.474.0",
@@ -22,6 +24,9 @@
     "zustand": "^5.0.3"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/dompurify": "^3.0.5",
     "@types/node": "^22.10.10",
     "@types/react": "^18.2.64",
@@ -34,6 +39,9 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "eslint-plugin-vitest-globals": "^1.5.0",
+    "jsdom": "^26.0.0",
+    "msw": "^2.7.0",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",

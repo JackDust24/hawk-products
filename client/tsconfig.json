@@ -17,8 +17,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
-    }
+    },
+    "types": ["@testing-library/jest-dom/vitest"]
   },
-  "include": ["src"],
+  "include": ["src", "/tests/setup.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
